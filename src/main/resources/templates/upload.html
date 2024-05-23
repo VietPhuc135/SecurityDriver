@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File to Google Drive</title>
+</head>
+<body>
+    <h1>File Upload to Google Drive</h1>
+    <div th:if="${message}">
+        <h3 th:text="${message}"></h3>
+    </div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" multiple="multiple" /><br/><br/>
+        <button type="submit">Upload</button>
+    </form>
+    <form action="/loginSuccess" method="get">
+        <button type="submit">Go to Home</button>
+    </form>
+</body>
+</html>

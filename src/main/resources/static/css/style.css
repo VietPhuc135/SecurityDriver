@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+    /*margin-left: 100px;*/
+}
+
+/* Custom styles for the title above the tabs */
+.page-title {
+    margin-top: 20px; /* Khoảng cách từ đầu trang */
+    margin-left: 550px;
+    margin-bottom: 10px;
+    font-size: 35px; /* Kích thước chữ */
+    font-weight: bold; /* Đậm */
+    color: #0e1d80;
+}
+
+/* Custom styles for the tabs */
+.nav-tabs {
+    width: 100%; /* Đảm bảo tabs chiếm toàn bộ chiều rộng của container */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    margin-top: 30px; /* Khoảng cách từ tiêu đề đến tabs */
+}
+
+/* Custom styles for the tab links */
+.nav-tabs .nav-item .nav-link {
+    font-weight: bold;
+    color: #333; /* Màu chữ */
+}
+
+/* Custom styles for the active tab link */
+.nav-tabs .nav-item .nav-link.active {
+    background-color: #007bff; /* Màu nền khi tab được chọn */
+    color: #fff; /* Màu chữ khi tab được chọn */
+}
+
+/* Custom styles for the tab content */
+.tab-content {
+    margin-top: 20px; /* Khoảng cách giữa tabs và nội dung */
+}
+
+/* Custom styles for the tab panes */
+.tab-pane {
+    padding: 20px; /* Khoảng cách giữa nội dung và biên */
+    border: 1px solid #ddd; /* Viền của nội dung */
+    border-radius: 5px; /* Bo tròn các góc của nội dung */
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Web Application</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Căn giữa theo chiều ngang */
+        }
+
+        /* Custom styles for the title above the tabs */
+        .page-title {
+            margin-top: 20px; /* Khoảng cách từ đầu trang */
+            margin-left: 550px;
+            margin-bottom: 10px;
+            font-size: 35px; /* Kích thước chữ */
+            font-weight: bold; /* Đậm */
+            color: #0e1d80;
+        }
+
+        /* Custom styles for the tabs */
+        .nav-tabs {
+            width: 100%; /* Đảm bảo tabs chiếm toàn bộ chiều rộng của container */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            margin-top: 30px; /* Khoảng cách từ tiêu đề đến tabs */
+        }
+
+        /* Custom styles for the tab links */
+        .nav-tabs .nav-item .nav-link {
+            font-weight: bold;
+            color: #333; /* Màu chữ */
+        }
+
+        /* Custom styles for the active tab link */
+        .nav-tabs .nav-item .nav-link.active {
+            background-color: #0e1d80; /* Màu nền khi tab được chọn */
+            color: #fff; /* Màu chữ khi tab được chọn */
+        }
+
+        /* Custom styles for the tab content */
+        .tab-content {
+            margin-top: 20px; /* Khoảng cách giữa tabs và nội dung */
+        }
+
+        /* Custom styles for the tab panes */
+        .tab-pane {
+            padding: 20px; /* Khoảng cách giữa nội dung và biên */
+            border: 1px solid #ddd; /* Viền của nội dung */
+            border-radius: 5px; /* Bo tròn các góc của nội dung */
+        }
+
+        img {
+            width: 400px; /* Độ rộng của ảnh */
+            height: 300px; /* Chiều cao tự động tính theo tỷ lệ */
+            cursor: pointer; /* Thay đổi con trỏ khi di chuột qua ảnh */
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        img.img-icon{
+            width: 250px; /* Độ rộng của ảnh */
+            height: 250px; /* Chiều cao tự động tính theo tỷ lệ */
+            cursor: pointer; /* Thay đổi con trỏ khi di chuột qua ảnh */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .text1{
+            font-size: 35px; /* Kích thước chữ */
+            font-weight: bold; /* Đậm */
+            margin-left: -5px;
+        }
+
+        .text2{
+            font-size: 20px; /* Kích thước chữ */
+            font-weight: lighter;
+            margin-left: -5px;
+        }
+
+        .logout1{
+            width: 80px;
+            height: 30px;
+            display: inline-block;
+            background-color: #136fbb;
+            text-align: center;
+            margin: 5px 10px 3px 10px;
+            border-radius: 10%;
+            border: none;
+            color: white;
+        }
+
+        .tab-image{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+            color: #333; /* Màu chữ */
+        }
+
+        .tab-page{
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+            color: #3fbe0c; /* Màu chữ */
+        }
+
+        .message2 {
+            display: none;
+        }
+
+        .button1{
+            width: 75px;
+            height: 30px;
+            margin-left: 150px;
+            background-color: #0c6ebe;
+            border-radius: 10%;
+            border: none;
+            color: white;
+        }
+
+        :root{
+            --success: green;
+            --warning: orange;
+            --error: red;
+
+            --success-light: rgba(0, 128, 0, 0.4);
+            --warning-light: rgba(203, 181, 16, 0.4);
+            --error-light: rgba(244, 16, 16, 0.4);
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+        .control10 button{
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            color: white;
+            margin: 0 10px;
+        }
+
+        #toasts1{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .toast1{
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            color: black;
+            font-size: 26px;
+            /*border-left: 6px solid var(--success);*/
+            overflow: hidden;
+            animation: slide_show 5s ease forwards;
+            margin-bottom: 10px;
+        }
+
+        .toast1 i{
+            margin: 0 10px;
+        }
+
+        .toast1 .countdown{
+            background: var(--success);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            animation: countdown 5s ease forwards;
+        }
+
+        .toast1.success{
+            /*border-left: 6px solid var(--success);*/
+            /*background: var(--success-light);*/
+            background: white;
+        }
+
+        .toast1.success .countdown{
+            background: var(--success);
+        }
+
+        @keyframes countdown{
+            0%{
+                width: 100%;
+            }
+            100%{
+                width: 0%;
+            }
+        }
+
+        @keyframes slide_show{
+            0%{
+                transform: translateX(-10%);
+            }
+            25%{
+                transform: translateX(0%);
+            }
+            50%{
+                transform: translateX(-10%);
+            }
+            100%{
+                transform: translateX(200%);
+            }
+        }
+    </style>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<h1 class="page-title">Crypto Search</h1>
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">HOME</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">MY FILES</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">SEARCH FILE</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">USER INFORMATION</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+            <img src="https://www.it-daily.net/images/Aufmacher-2021/Cloud-Security_shutterstock_1530570248_700.jpg" alt="Google Image">
+            <p class="tab-image">Search on Encrypted Data</p>
+            <p class="tab-page">Now you can access Google Drive securely</p>
+        </div>
+        <div class="tab-pane fade show active" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+            <h3>File Upload to Google Drive</h3>
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <label for="keyword">Keyword:</label>
+                <input type="text" id="keyword" name="keyword">
+                <input type="file" name="file" multiple="multiple" /><br/><br/>
+                <button class="button1" type="submit">Upload</button><br/><br/>
+            </form>
+
+            <div class="message2" id="message2" th:if="${message2}">
+                <div id="toasts1" >
+                    <div class="toast1 success">
+                        <span class="message2-text" th:text="${message2}"></span>
+                        <span class="countdown"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+            <h3>Search & Download File</h3>
+            <form action="/search" method="post">
+                <label for="keywordSearch">Keyword:</label>
+                <input type="text" id="keywordSearch" name="keywordSearch" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+            <div class="container">
+                <div class="profile">
+                    <img class="img-icon" th:src="${photoUrl}" alt="Profile Photo">
+                    <div class="details">
+                        <div th:if="${name}"><span class="text1" th:text="${name}"></span></div>
+                        <div th:if="${email}"><span class="text2" th:text="${email}"></span></div>
+                    </div>
+                </div>
+            </div>
+            <a class="logout1" href="/logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Kiểm tra trạng thái hiển thị của message2 trong sessionStorage
+        const messageElement = document.getElementById('message2');
+        const message2Displayed = sessionStorage.getItem('message2Displayed');
+        if (message2Displayed === 'true') {
+            if (messageElement) {
+                messageElement.style.display = 'block';
+            }
+            sessionStorage.removeItem('message2Displayed'); // Xóa trạng thái để không hiển thị lại lần sau
+        }
+
+        // Sau khi message2 hiển thị, đặt nó về null
+        if (messageElement) {
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 5000); // Hiển thị message2 trong 6 giây
+        }
+    });
+
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        // Lưu trạng thái hiển thị vào sessionStorage trước khi gửi form
+        sessionStorage.setItem('message2Displayed', 'true');
+    });
+</script>
+
+</body>
+</html>

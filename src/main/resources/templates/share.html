@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share2</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .message{
+            font-size: 22px;
+        }
+
+        .button1{
+            width: 75px;
+            height: 30px;
+            margin-left: 150px;
+            background-color: #0c6ebe;
+            border: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">Share File</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="message" th:if="${message}">
+                    <h3 class="message" th:text="${message}"></h3>
+                </div>
+
+                <form action="/shareFile" method="post">
+                    <div class="form-group">
+                        <label for="email">Email to share:</label>
+                        <input type="text" id="email" name="email">
+                    </div>
+                    <input type="hidden" name="fileId" th:value="${fileId}">
+                    <button type="submit" class="button1">Share</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shareModal" style="display:none;">
+    Launch demo modal
+</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#shareModal').modal('show');
+
+        // Khi modal đóng lại
+
+        $('#shareModal').on('hidden.bs.modal', function () {
+            // Trở về trang ban đầu (ở đây là trang chính của bạn hoặc trang cần hiển thị sau khi modal đóng)
+            $('#shareModal').remove();
+            window.location.href = "/search2";  // Điều hướng về trang chính
+        });
+    });
+</script>
+
+</body>
+</html>

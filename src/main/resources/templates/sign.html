@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Sign In</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">Google Sign In Information</h2>
+
+    <div class="row mt-3">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <img src="#" id="userPicture" class="card-img-top" alt="User Picture">
+                <div class="card-body">
+                    <h5 class="card-title" id="userName"></h5>
+                    <p class="card-text" id="userEmail"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Lấy dữ liệu từ server và hiển thị lên trang HTML
+    fetch('/signingoogle')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('userPicture').src = data.picture;
+            document.getElementById('userName').innerText = data.name;
+            document.getElementById('userEmail').innerText = data.email;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+
+</body>
+</html>
